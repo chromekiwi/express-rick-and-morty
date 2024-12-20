@@ -1,0 +1,25 @@
+{
+  "name": "express-rick-and-morty",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "RESTful API that fetches and manipulates data from the Rick and Morty API, the REST(ish) and GraphQL API based on the television show Rick and Morty.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --env-file .env src/index.js",
+    "start": "node --env-file .env src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chromekiwi/express-rick-and-morty.git"
+  },
+  "author": "Sebastián Bello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chromekiwi/express-rick-and-morty.git/issues"
+  },
+  "homepage": "https://github.com/chromekiwi/express-rick-and-morty.git#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
