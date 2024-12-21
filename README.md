@@ -5,31 +5,45 @@ RESTful API that fetches and manipulates data from the Rick and Morty API, the R
 ## URL
 
 ```
-/api/v1
+http://3.133.134.106:3000/api/v1
 ```
 
 ## Endpoints
 
-### Get all characters
+### Sign In
 
-- **URL:** `/characters`
-- **Method:** `GET`
-- **Description:** Retrieves a list of all characters.
+- **URL:** `/profile/signin`
+- **Method:** `POST`
+- **Description:** Authenticates a user and returns a token.
 - **Response:**
   - **Status:** `200 OK`
   - **Body:**
     ```json
     {
-      "results": [
-        // ...
-        {
-          "id": 16,
-          "name": "Amish_Cyborg",
-          "status": "Dead",
-          "gender": "Male"
-        }
-        // ...
-      ]
+      "email": "ricky@example.com",
+      "password": "hashed_password"
+    }
+    ```
+
+### Sign Out
+
+- **URL:** `/profile/signout`
+- **Method:** `POST`
+- **Description:** Signs out a user by clearing the token.
+- **Response:**
+  - **Status:** `204 No Content`
+
+### Verification
+
+- **URL:** `/profile/verification`
+- **Method:** `GET`
+- **Description:** Verifies the user's token.
+- **Response:**
+  - **Status:** `200 OK`
+  - **Body:**
+    ```json
+    {
+      "email": "ricky@example.com"
     }
     ```
 
@@ -39,8 +53,10 @@ RESTful API that fetches and manipulates data from the Rick and Morty API, the R
 - **Method:** `GET`
 - **Description:** Retrieves a list of all alive characters.
 - **Response:**
+
   - **Status:** `200 OK`
   - **Body:**
+
     ```json
     {
       "results": [
@@ -50,7 +66,28 @@ RESTful API that fetches and manipulates data from the Rick and Morty API, the R
           "status": "Dead",
           "gender": "Male"
         }
-        // ...
+        // more characters...
+      ]
+    }
+    ```
+
+### Get alive character by ID
+
+- **URL:** `/characters/:id`
+- **Method:** `GET`
+- **Description:** Retrieves a character by its ID.
+- **Response:**
+  - **Status:** `200 OK`
+  - **Body:**
+    ```json
+    {
+      "results": [
+        {
+          "id": 18,
+          "name": "Antenna_Morty",
+          "status": "Alive",
+          "gender": "Male"
+        }
       ]
     }
     ```
