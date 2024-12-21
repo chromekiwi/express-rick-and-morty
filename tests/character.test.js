@@ -25,17 +25,19 @@ afterAll(async () => {
   server.close();
 });
 
-test("Get all the characters", async () => {
-  const response = await request(app)
-    .get(`${URL}/characters`)
-    .set("Cookie", `token=${token}`);
-  expect(response.status).toBe(200);
-  expect(response.body.results[0]).toHaveProperty("id");
-});
-
 test("Get alive characters", async () => {
   const response = await request(app)
     .get(`${URL}/characters/alive`)
+    .set("Cookie", `token=${token}`);
+  expect(response.status).toBe(200);
+  expect(response.body.results[0]).toHaveProperty("id");
+  expect(response.body.results[0].status).toBe("Alive");
+});
+
+test("Get alive character by ID", async () => {
+  const id = 4;
+  const response = await request(app)
+    .get(`${URL}/characters/${id}`)
     .set("Cookie", `token=${token}`);
   expect(response.status).toBe(200);
   expect(response.body.results[0]).toHaveProperty("id");
