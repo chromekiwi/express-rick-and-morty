@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import { codes } from "../lib/utils.js";
 import { genToken } from "../auth/jwt.js";
 import { en } from "../lib/languages/en.js";
@@ -19,9 +20,12 @@ export const signin = async (req, res) => {
         .json({ description: en.UNAUTHORIZED });
     }
 
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
     const token = await genToken({ email });
     res.cookie("token", token);
-    res.status(codes.OK).json({ email, password });
+    res.status(codes.OK).json({ email, password: hash });
   } catch (error) {
     res
       .status(codes.INTERNAL_SERVER_ERROR)
@@ -58,9 +62,9 @@ export const verification = async (req, res) => {
       if (user.email != credentials.email)
         return res.status(codes.NOT_FOUND).json({ description: en.NOT_FOUND });
 
-      return res
-        .status(codes.OK)
-        .json({ email: user.email, password: credentials.password });
+      console.log(user);
+
+      return res.status(codes.OK).json({ email: user.email });
     });
   } catch (error) {
     res
