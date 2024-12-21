@@ -14,7 +14,9 @@ export const signin = async (req, res) => {
 
   try {
     if (email != credentials.email || password != credentials.password) {
-      return res.status(codes.NOT_FOUND).json({ description: en.NOT_FOUND });
+      return res
+        .status(codes.UNAUTHORIZED)
+        .json({ description: en.UNAUTHORIZED });
     }
 
     const token = await genToken({ email });
