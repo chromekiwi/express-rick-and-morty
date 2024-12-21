@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node --env-file .env src/index.js",
     "start": "node --env-file .env src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,8 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "morgan": "^1.10.0"
+    "jest": "^29.7.0",
+    "morgan": "^1.10.0",
+    "supertest": "^7.0.0"
   }
 }
