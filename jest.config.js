@@ -4,6 +4,7 @@ const config = {
   testEnvironment: "node",
   coveragePathIgnorePatterns: ["/node_modules/"],
   testTimeout: 10000,
+  setupFiles: ["./jest.setup.js"],
 };
 
 export default config;
