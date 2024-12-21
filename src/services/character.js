@@ -20,6 +20,10 @@ const formatCharacters = (characters) => {
   });
 };
 
+const identifyAliveCharacters = (characters) => {
+  return characters.filter((character) => character.status === status.ALIVE);
+};
+
 export const getAllCharacters = async (req, res) => {
   try {
     const response = await getAllCharactersRequest();
@@ -36,10 +40,28 @@ export const getAliveCharacters = async (req, res) => {
   try {
     const response = await getAllCharactersRequest();
     const characters = replaceCharacterName(response?.data?.results);
-    const aliveCharacters = characters.filter(
-      (character) => character.status === status.ALIVE
-    );
+    const aliveCharacters = identifyAliveCharacters(characters);
     res.status(codes.OK).json({ results: formatCharacters(aliveCharacters) });
+  } catch (error) {
+    res
+      .status(codes.INTERNAL_SERVER_ERROR)
+      .json({ description: en.INTERNAL_SERVER_ERROR });
+  }
+};
+
+export const getCharacterById = async (req, res) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const response = await getAllCharactersRequest();
+    const characters = replaceCharacterName(response?.data?.results);
+    const aliveCharacters = identifyAliveCharacters(characters);
+    const character = aliveCharacters.find((character) => character.id === id);
+    if (character) {
+      res.status(codes.OK).json({ results: formatCharacters([character]) });
+    } else {
+      res.status(codes.NOT_FOUND).json({ description: en.NOT_FOUND });
+    }
   } catch (error) {
     res
       .status(codes.INTERNAL_SERVER_ERROR)
