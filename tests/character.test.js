@@ -2,7 +2,7 @@ import request from "supertest";
 import app from "../src/app.js";
 
 let server;
-const PORT = process.env.PORT || 3001;
+const PORT = 3002;
 const URL = "/api/v1";
 
 let token;

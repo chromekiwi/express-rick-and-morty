@@ -15,5 +15,23 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
-      - name: Run Jest tests
+      - name: Create jest.setup.js
+        env:
+          PORT: ${{ secrets.PORT }}
+          URL: ${{ secrets.URL }}
+          KEY: ${{ secrets.KEY }}
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          echo "process.env.URL = '${{ env.URL }}';" >> jest.setup.js
+          echo "process.env.KEY = '${{ env.KEY }}';" >> jest.setup.js
+          echo "process.env.EMAIL = '${{ env.EMAIL }}';" >> jest.setup.js
+          echo "process.env.PASSWORD = '${{ env.PASSWORD }}';" >> jest.setup.js
+      - name: Run tests
+        env:
+          PORT: ${{ secrets.PORT }}
+          URL: ${{ secrets.URL }}
+          KEY: ${{ secrets.KEY }}
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: npm test
