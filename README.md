@@ -63,7 +63,7 @@ http://3.133.134.106:3000/api/v1
         {
           "id": 1,
           "name": "Rick_Sanchez",
-          "status": "Dead",
+          "status": "Alive",
           "gender": "Male"
         }
         // more characters...
